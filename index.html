@@ -1,12 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/shn3tym.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Weather Dashboard</title>
 </head>
-<body>
+<body class="has-background-white-bis">
+    
+    <!-- Title -->
+    <div class="columns">
+        <div class="column has-background-link has-text-centered">
+            <h1 class="title has-text-white mt-4 mb-4">Weather Dashboard</h1>
+        </div>
+    </div>
 
+    <!-- Search & saved cities -->
+    <div class="columns">
+        <div class="column is-2 ml-3 has-background-white is-nav-mw is-full-height">
+            <div class="block">
+                <label class="title is-5">Search for a city:</label>
+                <div class="field has-addons mt-3">
+                    <div class="control is-full-width">
+                        <input class="input" onfocus="this.value=''" type="text" placeholder="City name" id="city">
+                    </div>
+                    <div class="control">
+                        <button type="button" class="button has-background-link has-text-white" type="submit" id="search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="has-text-danger" id="searchError"></p>
+            </div>
+            <label class="title is-5">Search History:</label>
+            <div class="block mt-3" id="savedCities">
+                <!-- Saved city searches go here -->
+            </div>
+        </div>
+
+        <!-- City main display -->
+        <div class="container">
+        <div class="column pl-5 pr-6">
+            <div class="block">
+                <p class="title is-2" id="cityName">
+                    City
+                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image">
+                </p>
+                <p class="title is-4 nm-1" id="date">Date</p>
+            </div>
+            <div class="block">
+                <div class="columns">
+                    <!-- Temperature card -->
+                    <div class="column">
+                        <div class="card is-med-card-mw">
+                            <div class="card-content has-text-centered">
+                                <div class="block">
+                                    <strong class="has-text-grey">Temperature</strong>
+                                </div>
+                                <div class="block" id="currentTemp">
+                                    <text class="title is-0">77F</text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Humidity card -->
+                    <div class="column">
+                        <div class="card is-med-card-mw">
+                            <div class="card-content has-text-centered">
+                                <div class="block">
+                                    <strong class="has-text-grey">Humidity</strong>
+                                </div>
+                                <div class="block" id="currentHumidity">
+                                    <text class="title is-0">50%</text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Wind Speed card -->
+                    <div class="column">
+                        <div class="card is-med-card-mw">
+                            <div class="card-content has-text-centered">
+                                <div class="block">
+                                    <strong class="has-text-grey">Wind Speed</strong>
+                                </div>
+                                <div class="block" id="currentWind">
+                                    <text class="title is-0">20</text><text class="title is-3">mp/h</text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- UV Index Card -->
+                    <div class="column">
+                        <div class="card is-med-card-mw">
+                            <div class="card-content has-text-centered">
+                                <div class="block">
+                                    <strong class="has-text-grey">UV Index</strong>
+                                </div>
+                                <div class="block" id="currentUV">
+                                    <text class="title is-0 has-text-warning">4.21</text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- 7 Day Forecast  -->
+            <div class="block pt-1">
+                <p class="title is-4">
+                    7 Day Forecast
+                </p>
+            </div>
+            <div class="block mb-5">
+                <div class="columns">
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="tomorrow">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateTomorrow">Month ##</p>
+                                <div class="card-image has-text-centered" id="tomorrowIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="tomorrowTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="tomorrowHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>                        
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="dayTwo">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateTwo">Month ##</p>
+                                <div class="card-image has-text-centered" id="dayTwoIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="dayTwoTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="dayTwoHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="dayThree">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateThree">Month ##</p>
+                                <div class="card-image has-text-centered" id="dayThreeIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="dayThreeTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="dayThreeHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered"  id="dayFour">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateFour">Month ##</p>
+                                <div class="card-image has-text-centered" id="dayFourIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="dayFourTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="dayFourHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="dayFive">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateFive">Month ##</p>
+                                <div class="card-image has-text-centered" id="dayFiveIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="dayFiveTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="dayFiveHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="daySix">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateSix">Month ##</p>
+                                <div class="card-image has-text-centered" id="daySixIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="daySixTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="daySixHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card is-small-card-mw">
+                            <div class="card-content">
+                                <p class="is-5 has-text-centered" id="daySeven">Date</p>
+                                <p class="has-text-grey has-text-centered mb-1" id="dateSeven">Month ##</p>
+                                <div class="card-image has-text-centered" id="daySevenIcon">
+                                    <img src="https://bulma.io/images/placeholders/48x48.png" alt="Placeholder image"> 
+                                </div>            
+                                <div class="content">
+                                    <div class="has-text-centered" id="daySevenTemp">
+                                        Temp: ### F
+                                    </div>
+                                    <div class="has-text-centered has-text-grey" id="daySevenHumidity">
+                                        Humidity: ### F
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
