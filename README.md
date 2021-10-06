@@ -2,6 +2,6 @@
 
 Instantly look up your city for a local 7 day forecast! Free of charge!
 
-CLICK HERE TO VIEW THE FORECAST! > //LINK//
+CLICK HERE TO VIEW THE FORECAST! > https://forrestpangle.github.io/Weather-Dash1/
 
-![images/WeatherDash.png]
+![WeatherDash](https://user-images.githubusercontent.com/87397971/136123060-af4d38ef-4269-4a74-8988-224fae6fbf3b.png)
